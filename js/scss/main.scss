@@ -39,15 +39,15 @@ body {
   margin-left: 64%;
 }
 
-.stripe1 {
-    top: -150px;
-}
-.stripe2 {
-    top: 150px;
-}
-.stripe3 {
-    top: 450px;
-}
+// .stripe1 {
+//     top: -150px;
+// }
+// .stripe2 {
+//     top: 150px;
+// }
+// .stripe3 {
+//     top: 450px;
+// }
 
 // cars
 
@@ -60,8 +60,6 @@ body {
 }
 
 .car-player {
-  // bottom: 2%;
-  // left: 44%;
   transform: rotate(180deg);
   background-image: url("../images/orange_car.png");
 }
