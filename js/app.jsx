@@ -35,12 +35,13 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
     animateBackground = () => {
+      console.log(this.state.stripe2);
       if (this.state.game_over === false) {
         this.setState({
           stripe_on: requestAnimationFrame(this.animateBackground),
-          stripe1: parseInt(this.state.stripe1) + 3 + "px",
-          stripe2: parseInt(this.state.stripe2) + 3 + "px",
-          stripe3: parseInt(this.state.stripe3) + 3 + "px",
+          stripe1: parseInt(this.state.stripe1) < parseInt(this.state.clientHeight) + 150 ? parseInt(this.state.stripe1) + 3 + "px" : "-150px",
+          stripe2: parseInt(this.state.stripe2) < parseInt(this.state.clientHeight) + 150 ? parseInt(this.state.stripe2) + 3 + "px" : "150px",
+          stripe3: parseInt(this.state.stripe3) < parseInt(this.state.clientHeight) + 150 ? parseInt(this.state.stripe3) + 3 + "px" : "450px",
         })
       }
     }
@@ -48,15 +49,15 @@ document.addEventListener("DOMContentLoaded", function(){
 
     //moving player
     turn = (e) => {
-      console.log(this.state.clientWidth, this.state.playerOffsetLeft);
+      // console.log(document.querySelector('.road').getBoundingClientRect(), this.state.playerOffsetLeft);
+      console.log(this.state.clientWidth);
       if (this.state.game_over === false) {
         let key = e.keyCode;
         this.setState({
 
-           clientHeight: document.querySelector('.road').clientHeight,
+           // clientHeight: document.querySelector('.road').clientHeight,
+           // clientHeight: document.querySelector('.road').clientWidth,
            playerOffsetLeft: document.querySelector('.car-player').offsetLeft,
-           // playerOffsetLeft: document.querySelector('.car-player').offsetLeft,
-           // carOffsetRight: document.querySelector('.car-player').offsetLeft,
            playerOffsetTop: document.querySelector('.car-player').offsetTop,
            // carOffsetBottom: document.querySelector('.car-player').offsetLeft,
         });
@@ -66,12 +67,11 @@ document.addEventListener("DOMContentLoaded", function(){
             })
         } else if (key === 38 && this.state.move_up === false) {
             this.setState({
-              move_up: requestAnimationFrame(this.up)
+              move_up: this.state.playerOffsetTop > 10 ? requestAnimationFrame(this.up) : cancelAnimationFrame(this.state.move_up)
             })
         } else if (key === 39 && this.state.move_right === false) {
-
             this.setState({
-              move_right: this.state.playerOffsetLeft < this.state.clientWidth ? requestAnimationFrame(this.right) : cancelAnimationFrame(this.state.move_right)
+              move_right: this.state.playerOffsetLeft  <  parseInt(this.state.clientWidth) - 99 ? requestAnimationFrame(this.right) : cancelAnimationFrame(this.state.move_right)
             })
         } else if (key === 40 && this.state.move_down === false) {
             this.setState({
@@ -91,16 +91,19 @@ document.addEventListener("DOMContentLoaded", function(){
           })
         } else if (key === 38  ) {
           this.setState({
+            playerOffsetTop: document.querySelector('.car-player').offsetTop,
             move_up: cancelAnimationFrame(this.state.move_up),
             move_up: false
           })
         } else if (key === 39) {
           this.setState({
+            playerOffsetLeft: document.querySelector('.car-player').offsetLeft,
             move_right: cancelAnimationFrame(this.state.move_right),
             move_right: false
           })
         } else if (key === 40) {
           this.setState({
+            playerOffsetTop: document.querySelector('.car-player').offsetTop,
             move_down: cancelAnimationFrame(this.state.move_down),
             move_down: false
           })
@@ -121,7 +124,8 @@ document.addEventListener("DOMContentLoaded", function(){
       if (this.state.game_over === false) {
         this.setState({
           player_left: parseInt(this.state.player_left) + 1 + "%",
-          move_right: this.state.playerOffsetLeft < this.state.clientWidth ? requestAnimationFrame(this.right) : cancelAnimationFrame(this.state.move_right)
+          playerOffsetLeft: document.querySelector('.car-player').offsetLeft,
+          move_right: this.state.playerOffsetLeft  <  parseInt(this.state.clientWidth) - 99 ? requestAnimationFrame(this.right) : cancelAnimationFrame(this.state.move_right)
         })
       }
     }
@@ -129,7 +133,8 @@ document.addEventListener("DOMContentLoaded", function(){
       if (this.state.game_over === false) {
         this.setState({
           player_bottom: parseInt(this.state.player_bottom) + 1 + "%",
-          move_up: requestAnimationFrame(this.up)
+          playerOffsetTop: document.querySelector('.car-player').offsetTop,
+          move_up: this.state.playerOffsetTop > 10 ? requestAnimationFrame(this.up) : cancelAnimationFrame(this.state.move_up)
         })
       }
     }
@@ -137,7 +142,8 @@ document.addEventListener("DOMContentLoaded", function(){
       if (this.state.game_over === false) {
         this.setState({
           player_bottom: parseInt(this.state.player_bottom) - 1 + "%",
-          move_down: requestAnimationFrame(this.down)
+          playerOffsetTop: document.querySelector('.car-player').offsetTop,
+          move_down: this.state.playerOffsetTop < parseInt(this.state.clientHeight) - 183 ? requestAnimationFrame(this.down) : cancelAnimationFrame(this.state.move_down)
         })
       }
     }
