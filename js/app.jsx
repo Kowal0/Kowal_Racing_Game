@@ -30,18 +30,21 @@ document.addEventListener("DOMContentLoaded", function(){
 
         stripe1: "-150px",
         stripe2: "150px",
-        stripe3: "450px"
+        stripe3: "450px",
+        stripe4: "750px",
       }
     }
 
     animateBackground = () => {
-      console.log(this.state.stripe2);
+      // console.log(this.state.stripe2);
+      console.log(this.state.clientHeight);
       if (this.state.game_over === false) {
         this.setState({
           stripe_on: requestAnimationFrame(this.animateBackground),
-          stripe1: parseInt(this.state.stripe1) < parseInt(this.state.clientHeight) + 150 ? parseInt(this.state.stripe1) + 3 + "px" : "-150px",
-          stripe2: parseInt(this.state.stripe2) < parseInt(this.state.clientHeight) + 150 ? parseInt(this.state.stripe2) + 3 + "px" : "150px",
-          stripe3: parseInt(this.state.stripe3) < parseInt(this.state.clientHeight) + 150 ? parseInt(this.state.stripe3) + 3 + "px" : "450px",
+          stripe1: (parseInt(this.state.stripe1) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe1) + 3 + "px" : "-150px",
+          stripe2: (parseInt(this.state.stripe2) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe2) + 3 + "px" : "-150px",
+          stripe3: (parseInt(this.state.stripe3) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe3) + 3 + "px" : "-150px",
+          stripe4: (parseInt(this.state.stripe4) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe4) + 3 + "px" : "-150px",
         })
       }
     }
@@ -156,7 +159,10 @@ document.addEventListener("DOMContentLoaded", function(){
 
       document.addEventListener('keydown', e => this.turn(e))
       document.addEventListener('keyup', e => this.turnStop(e))
-      document.addEventListener('load', this.animateBackground());
+      setTimeout(() => {
+        document.addEventListener('load', this.animateBackground());
+      }, 1000)
+
 
     }
 
@@ -166,9 +172,11 @@ document.addEventListener("DOMContentLoaded", function(){
            <div className="stripe stripe-l" style={{top:this.state.stripe1}}></div>
            <div className="stripe stripe-l" style={{top:this.state.stripe2}}></div>
            <div className="stripe stripe-l" style={{top:this.state.stripe3}}></div>
+           <div className="stripe stripe-l" style={{top:this.state.stripe4}}></div>
            <div className="stripe stripe-r" style={{top:this.state.stripe1}}></div>
            <div className="stripe stripe-r" style={{top:this.state.stripe2}}></div>
            <div className="stripe stripe-r" style={{top:this.state.stripe3}}></div>
+           <div className="stripe stripe-r" style={{top:this.state.stripe4}}></div>
            <div className="car car-player" style={{left:this.state.player_left, bottom:this.state.player_bottom}}></div>
            <div className="car car-1"></div>
            <div className="car car-2"></div>
