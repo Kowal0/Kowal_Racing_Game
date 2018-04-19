@@ -32,19 +32,27 @@ document.addEventListener("DOMContentLoaded", function(){
         stripe2: "150px",
         stripe3: "450px",
         stripe4: "750px",
+
+        car1: "-100px",
+        car2: "-200px",
+        car3: "-350px",
       }
     }
 
     animateBackground = () => {
-      // console.log(this.state.stripe2);
       console.log(this.state.clientHeight);
       if (this.state.game_over === false) {
         this.setState({
           stripe_on: requestAnimationFrame(this.animateBackground),
-          stripe1: (parseInt(this.state.stripe1) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe1) + 3 + "px" : "-150px",
-          stripe2: (parseInt(this.state.stripe2) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe2) + 3 + "px" : "-150px",
-          stripe3: (parseInt(this.state.stripe3) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe3) + 3 + "px" : "-150px",
-          stripe4: (parseInt(this.state.stripe4) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe4) + 3 + "px" : "-150px",
+
+          stripe1: (parseInt(this.state.stripe1) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe1) + 6 + "px" : "-150px",
+          stripe2: (parseInt(this.state.stripe2) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe2) + 6 + "px" : "-150px",
+          stripe3: (parseInt(this.state.stripe3) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe3) + 6 + "px" : "-150px",
+          stripe4: (parseInt(this.state.stripe4) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe4) + 6 + "px" : "-150px",
+
+          car1: (parseInt(this.state.car1) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car1) + 4 + "px" : "-100px",
+          car2: (parseInt(this.state.car2) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car2) + 4 + "px" : "-150px",
+          car3: (parseInt(this.state.car3) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car3) + 4 + "px" : "-200px",
         })
       }
     }
@@ -58,8 +66,6 @@ document.addEventListener("DOMContentLoaded", function(){
         let key = e.keyCode;
         this.setState({
 
-           // clientHeight: document.querySelector('.road').clientHeight,
-           // clientHeight: document.querySelector('.road').clientWidth,
            playerOffsetLeft: document.querySelector('.car-player').offsetLeft,
            playerOffsetTop: document.querySelector('.car-player').offsetTop,
            // carOffsetBottom: document.querySelector('.car-player').offsetLeft,
@@ -168,19 +174,21 @@ document.addEventListener("DOMContentLoaded", function(){
 
      render() {
        return (
-         <div className="road" >
-           <div className="stripe stripe-l" style={{top:this.state.stripe1}}></div>
-           <div className="stripe stripe-l" style={{top:this.state.stripe2}}></div>
-           <div className="stripe stripe-l" style={{top:this.state.stripe3}}></div>
-           <div className="stripe stripe-l" style={{top:this.state.stripe4}}></div>
-           <div className="stripe stripe-r" style={{top:this.state.stripe1}}></div>
-           <div className="stripe stripe-r" style={{top:this.state.stripe2}}></div>
-           <div className="stripe stripe-r" style={{top:this.state.stripe3}}></div>
-           <div className="stripe stripe-r" style={{top:this.state.stripe4}}></div>
-           <div className="car car-player" style={{left:this.state.player_left, bottom:this.state.player_bottom}}></div>
-           <div className="car car-1"></div>
-           <div className="car car-2"></div>
-           <div className="car car-3"></div>
+         <div className="road">
+           <div className="road-background" style={{top:this.state.road}}>
+             <div className="stripe stripe-l" style={{top:this.state.stripe1}}></div>
+             <div className="stripe stripe-l" style={{top:this.state.stripe2}}></div>
+             <div className="stripe stripe-l" style={{top:this.state.stripe3}}></div>
+             <div className="stripe stripe-l" style={{top:this.state.stripe4}}></div>
+             <div className="stripe stripe-r" style={{top:this.state.stripe1}}></div>
+             <div className="stripe stripe-r" style={{top:this.state.stripe2}}></div>
+             <div className="stripe stripe-r" style={{top:this.state.stripe3}}></div>
+             <div className="stripe stripe-r" style={{top:this.state.stripe4}}></div>
+             <div className="car car-player" style={{left:this.state.player_left, bottom:this.state.player_bottom}}></div>
+             <div className="car car-1" style={{top:this.state.car1}}></div>
+             <div className="car car-2" style={{top:this.state.car2}}></div>
+             <div className="car car-3" style={{top:this.state.car3}}></div>
+           </div>
          </div>
        )
      }
