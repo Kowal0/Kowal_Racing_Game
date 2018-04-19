@@ -25,12 +25,6 @@ body {
     overflow: hidden;
 }
 
-// .road-background {
-//   height: 2000px;
-//   width: 100%;
-//   background-image: url("../images/road.png") repeat-y;
-// }
-
 .stripe {
     position: absolute;
     height: 150px;
@@ -48,14 +42,14 @@ body {
 
 // cars
 
-.car{
+.car {
     position: absolute;
     height: 173px;
     width: 89px;
 }
 
 .car-player {
-  transform: rotate(180deg);
+  // transform: rotate(180deg);
   background-image: url("../images/orange_car.png");
 }
 

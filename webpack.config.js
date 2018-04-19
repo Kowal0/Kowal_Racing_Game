@@ -31,8 +31,12 @@ module.exports = {
           }
         }
       },
+      // {
+      //   test: /\.mp3$/,
+      //   use: {loader: 'file-loader'},
+      // },
       {
-        test: /\.(png|jpe?g|svg|gif|woff|otf)$/,
+        test: /\.(png|jpe?g|svg|gif|woff|otf|mp3)$/,
         use: {loader: 'file-loader'}
       },
       {
