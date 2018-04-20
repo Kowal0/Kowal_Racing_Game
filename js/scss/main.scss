@@ -20,7 +20,6 @@ body {
     margin: 0 auto;
     border-left: 8px solid grey;
     border-right: 8px solid grey;
-    // background-image: url("../images/road.png");
     background-color: rgb(48, 48, 48);
     overflow: hidden;
 }
@@ -38,6 +37,19 @@ body {
 
 .stripe-r {
   margin-left: 64%;
+}
+
+.timer {
+  position: fixed;
+  text-align: center;
+  z-index: 1;
+  border: 1px solid white;
+  border-top: none;
+  // border-radius: 50%;
+  padding: 0 1.5rem;
+  color:white;
+  font-size: 3rem;
+  left: 50%;
 }
 
 // cars

@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function(){
       super(props);
       this.state={
         game_over: false,
+        timer: 30,
 
         clientHeight: 0,
         clientWidth: 0,
@@ -48,6 +49,22 @@ document.addEventListener("DOMContentLoaded", function(){
       }
     }
 
+    countTime = () => {
+      this.timer = setInterval(() => {
+        if (this.state.timer > 0) {
+          this.setState({
+            timer: this.state.timer - 1
+          })
+        } else {
+          this.setState({
+            game_over: true
+          })
+          backgroundMusic.stop()
+        }
+
+      }, 1000)
+    }
+
     //car collisions
     carCollide = () => {
       this.playerYTop = this.state.playerOffsetTop;
@@ -76,6 +93,7 @@ document.addEventListener("DOMContentLoaded", function(){
       (this.playerXRight >= this.car1XLeft && this.playerXRight <= this.car1XRight))) {
 
           console.log("jeb");
+          this.crash.play();
           this.setState({
             game_over: true
           })
@@ -84,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function(){
       ((this.playerXLeft <= this.car2XRight && this.playerXLeft >= this.car2XLeft) ||
       (this.playerXRight >= this.car2XLeft && this.playerXRight <= this.car2XRight))) {
         console.log("jeb");
+        this.crash.play();
         this.setState({
           game_over: true
         })
@@ -92,6 +111,7 @@ document.addEventListener("DOMContentLoaded", function(){
       ((this.playerXLeft <= this.car3XRight && this.playerXLeft >= this.car3XLeft) ||
       (this.playerXRight >= this.car3XLeft && this.playerXRight <= this.car3XRight))) {
         console.log("jeb");
+        this.crash.play();
         this.setState({
           game_over: true
         })
@@ -250,12 +270,15 @@ document.addEventListener("DOMContentLoaded", function(){
       })
 
       const music = require('./music/Aparatus.mp3');
-      const backgroundMusic = new Audio(music)
+      const backgroundMusic = new Audio(music);
+      this.carCrash = require('./music/Car-crash.mp3');
+      this.crash = new Audio(this.carCrash);
 
       document.addEventListener('keydown', e => this.turn(e))
       document.addEventListener('keyup', e => this.turnStop(e))
       setTimeout(() => {
         document.addEventListener('load', this.animateBackground());
+        document.addEventListener('load', this.countTime());
       }, 1000)
 
       backgroundMusic.play()
@@ -265,8 +288,9 @@ document.addEventListener("DOMContentLoaded", function(){
 
      render() {
        return (
+
          <div className="road">
-           <div className="road-background" style={{top:this.state.road}}>
+             <div className="timer">{this.state.timer}</div>
              <div className="stripe stripe-l" style={{top:this.state.stripe1}}></div>
              <div className="stripe stripe-l" style={{top:this.state.stripe2}}></div>
              <div className="stripe stripe-l" style={{top:this.state.stripe3}}></div>
@@ -279,7 +303,6 @@ document.addEventListener("DOMContentLoaded", function(){
              <div className="car car-1" style={{top:this.state.car1, left:this.state.car1Left}}></div>
              <div className="car car-2" style={{top:this.state.car2, left:this.state.car2Left}}></div>
              <div className="car car-3" style={{top:this.state.car3, left:this.state.car3Left}}></div>
-           </div>
          </div>
        )
      }
