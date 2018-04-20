@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", function(){
       this.state={
         game_over: false,
         timer: 30,
+        resultText: "",
+        resultClass: "",
 
         clientHeight: 0,
         clientWidth: 0,
@@ -50,19 +52,32 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
     countTime = () => {
-      this.timer = setInterval(() => {
-        if (this.state.timer > 0) {
-          this.setState({
-            timer: this.state.timer - 1
-          })
-        } else {
-          this.setState({
-            game_over: true
-          })
-          backgroundMusic.stop()
-        }
+        this.timer = setInterval(() => {
+          if (this.state.timer === 0) {
+            this.setState({
+              game_over: true,
+              resultText: "Git!",
+              resultClass: "result"
+            })
+            this.backgroundMusic.pause();
+            clearInterval(this.timer);
+          } else if (this.state.game_over === true) {
+            this.setState({
+              resultText: "Lol!",
+              resultClass: "result"
+            })
+            this.backgroundMusic.pause();
+            clearInterval(this.timer);
+          } else {
+            this.setState({
+              timer: this.state.timer - 1
+            })
+          }
 
-      }, 1000)
+
+        }, 1000)
+
+
     }
 
     //car collisions
@@ -269,8 +284,8 @@ document.addEventListener("DOMContentLoaded", function(){
         playerOffsetLeft: document.querySelector('.car-player').offsetLeft,
       })
 
-      const music = require('./music/Aparatus.mp3');
-      const backgroundMusic = new Audio(music);
+      this.music = require('./music/Aparatus.mp3');
+      this.backgroundMusic = new Audio(this.music);
       this.carCrash = require('./music/Car-crash.mp3');
       this.crash = new Audio(this.carCrash);
 
@@ -281,7 +296,7 @@ document.addEventListener("DOMContentLoaded", function(){
         document.addEventListener('load', this.countTime());
       }, 1000)
 
-      backgroundMusic.play()
+      this.backgroundMusic.play()
 
 
     }
@@ -290,6 +305,7 @@ document.addEventListener("DOMContentLoaded", function(){
        return (
 
          <div className="road">
+           <div className={this.state.resultClass}>{this.state.resultText}</div>
              <div className="timer">{this.state.timer}</div>
              <div className="stripe stripe-l" style={{top:this.state.stripe1}}></div>
              <div className="stripe stripe-l" style={{top:this.state.stripe2}}></div>
@@ -303,6 +319,7 @@ document.addEventListener("DOMContentLoaded", function(){
              <div className="car car-1" style={{top:this.state.car1, left:this.state.car1Left}}></div>
              <div className="car car-2" style={{top:this.state.car2, left:this.state.car2Left}}></div>
              <div className="car car-3" style={{top:this.state.car3, left:this.state.car3Left}}></div>
+
          </div>
        )
      }
