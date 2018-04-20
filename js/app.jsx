@@ -158,10 +158,10 @@ document.addEventListener("DOMContentLoaded", function(){
         this.setState({
           stripe_on: requestAnimationFrame(this.animateBackground),
 
-          stripe1: (parseInt(this.state.stripe1) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe1) + 12 + "px" : "-150px",
-          stripe2: (parseInt(this.state.stripe2) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe2) + 12 + "px" : "-150px",
-          stripe3: (parseInt(this.state.stripe3) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe3) + 12 + "px" : "-150px",
-          stripe4: (parseInt(this.state.stripe4) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe4) + 12 + "px" : "-150px",
+          stripe1: (parseInt(this.state.stripe1) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe1) + 16 + "px" : "-150px",
+          stripe2: (parseInt(this.state.stripe2) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe2) + 16 + "px" : "-150px",
+          stripe3: (parseInt(this.state.stripe3) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe3) + 16 + "px" : "-150px",
+          stripe4: (parseInt(this.state.stripe4) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe4) + 16 + "px" : "-150px",
 
           car1OffsetLeft: document.querySelector('.car-1').offsetLeft,
           car2OffsetLeft: document.querySelector('.car-2').offsetLeft,
@@ -169,10 +169,10 @@ document.addEventListener("DOMContentLoaded", function(){
           car4OffsetLeft: document.querySelector('.car-4').offsetLeft,
 
 
-          car1: (parseInt(this.state.car1) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car1) + 10 + "px" : "-100px",
-          car2: (parseInt(this.state.car2) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car2) + 10 + "px" : "-150px",
-          car3: (parseInt(this.state.car3) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car3) + 10 + "px" : "-200px",
-          car4: (parseInt(this.state.car4) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car4) + 10 + "px" : "-550px",
+          car1: (parseInt(this.state.car1) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car1) + 14 + "px" : "-100px",
+          car2: (parseInt(this.state.car2) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car2) + 14 + "px" : "-150px",
+          car3: (parseInt(this.state.car3) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car3) + 14 + "px" : "-200px",
+          car4: (parseInt(this.state.car4) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car4) + 14 + "px" : "-550px",
         })
         this.carCollide();
         this.spawnCar();
