@@ -71,36 +71,27 @@ body {
     position: absolute;
     height: 173px;
     width: 89px;
-    // border-radius: 50%;
 }
 
 .car-player {
-  // transform: rotate(180deg);
   background-image: url("../images/orange_car.png");
 }
-
 .car-1 {
   transform: rotate(180deg);
-  top: -100px;
-  // left: 60%;
   background-image: url("../images/blue_car.png");
 }
 .car-2 {
   transform: rotate(180deg);
-  top: -200px;
-  // left: 40%;
   background-image: url("../images/green_car.png");
 }
 .car-3 {
   transform: rotate(180deg);
-  top: -350px;
-  // left: 50%;
   background-image: url("../images/pink_car.png");
 }
-// .car-4 {
-//   transform: rotate(180deg);
-//   background-image: url("../images/red_car.png");
-// }
+.car-4 {
+  transform: rotate(180deg);
+  background-image: url("../images/red_car.png");
+}
 // .car-5 {
 //   transform: rotate(180deg);
 //   background-image: url("../images/white_car.png");

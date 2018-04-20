@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom';
 
 import style from './scss/main.scss'
 
-
-
-
 document.addEventListener("DOMContentLoaded", function(){
 
   class Game extends React.Component {
@@ -48,6 +45,9 @@ document.addEventListener("DOMContentLoaded", function(){
         car3: "-350px",
         car3Left: "50%",
         car3OffsetLeft: null,
+        car4: "-550px",
+        car4Left: "10%",
+        car4OffsetLeft: null,
       }
     }
 
@@ -73,11 +73,7 @@ document.addEventListener("DOMContentLoaded", function(){
               timer: this.state.timer - 1
             })
           }
-
-
         }, 1000)
-
-
     }
 
     //car collisions
@@ -102,11 +98,15 @@ document.addEventListener("DOMContentLoaded", function(){
       this.car3XLeft = this.state.car3OffsetLeft;
       this.car3XRight = this.state.car3OffsetLeft + 75;
 
+      this.car4YTop = parseInt(this.state.car4);
+      this.car4YBottom = parseInt(this.state.car4) + 163;
+      this.car4XLeft = this.state.car4OffsetLeft;
+      this.car4XRight = this.state.car4OffsetLeft + 75;
+
       if (((this.playerYBottom >= this.car1YTop && this.playerYBottom <= this.car1YBottom) ||
       (this.playerYTop <= this.car1YBottom && this.playerYTop >= this.car1YTop)) &&
       ((this.playerXLeft <= this.car1XRight && this.playerXLeft >= this.car1XLeft) ||
       (this.playerXRight >= this.car1XLeft && this.playerXRight <= this.car1XRight))) {
-
           console.log("jeb");
           this.crash.play();
           this.setState({
@@ -130,6 +130,15 @@ document.addEventListener("DOMContentLoaded", function(){
         this.setState({
           game_over: true
         })
+      } else if (((this.playerYBottom >= this.car4YTop && this.playerYBottom <= this.car4YBottom) ||
+      (this.playerYTop <= this.car4YBottom && this.playerYTop >= this.car4YTop)) &&
+      ((this.playerXLeft <= this.car4XRight && this.playerXLeft >= this.car4XLeft) ||
+      (this.playerXRight >= this.car4XLeft && this.playerXRight <= this.car4XRight))) {
+        console.log("jeb4");
+        this.crash.play();
+        this.setState({
+          game_over: true
+        })
       }
     }
     //car spawning
@@ -137,7 +146,8 @@ document.addEventListener("DOMContentLoaded", function(){
       this.setState({
         car1Left: (parseInt(this.state.car1) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (31 - 5) + 5) + "%" : this.state.car1Left,
         car2Left: (parseInt(this.state.car2) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (57 - 31) + 26) + "%" : this.state.car2Left,
-        car3Left: (parseInt(this.state.car3) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (83 - 57) + 57) + "%" : this.state.car3Left,
+        car3Left: (parseInt(this.state.car3) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (85 - 57) + 57) + "%" : this.state.car3Left,
+        car4Left: (parseInt(this.state.car4) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (85 - 30) + 30) + "%" : this.state.car4Left,
       })
     }
 
@@ -148,35 +158,32 @@ document.addEventListener("DOMContentLoaded", function(){
         this.setState({
           stripe_on: requestAnimationFrame(this.animateBackground),
 
-          stripe1: (parseInt(this.state.stripe1) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe1) + 10 + "px" : "-150px",
-          stripe2: (parseInt(this.state.stripe2) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe2) + 10 + "px" : "-150px",
-          stripe3: (parseInt(this.state.stripe3) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe3) + 10 + "px" : "-150px",
-          stripe4: (parseInt(this.state.stripe4) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe4) + 10 + "px" : "-150px",
+          stripe1: (parseInt(this.state.stripe1) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe1) + 12 + "px" : "-150px",
+          stripe2: (parseInt(this.state.stripe2) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe2) + 12 + "px" : "-150px",
+          stripe3: (parseInt(this.state.stripe3) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe3) + 12 + "px" : "-150px",
+          stripe4: (parseInt(this.state.stripe4) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe4) + 12 + "px" : "-150px",
 
           car1OffsetLeft: document.querySelector('.car-1').offsetLeft,
           car2OffsetLeft: document.querySelector('.car-2').offsetLeft,
           car3OffsetLeft: document.querySelector('.car-3').offsetLeft,
+          car4OffsetLeft: document.querySelector('.car-4').offsetLeft,
 
 
-          car1: (parseInt(this.state.car1) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car1) + 8 + "px" : "-100px",
-          car2: (parseInt(this.state.car2) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car2) + 8 + "px" : "-150px",
-          car3: (parseInt(this.state.car3) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car3) + 8 + "px" : "-200px",
-
-
+          car1: (parseInt(this.state.car1) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car1) + 10 + "px" : "-100px",
+          car2: (parseInt(this.state.car2) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car2) + 10 + "px" : "-150px",
+          car3: (parseInt(this.state.car3) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car3) + 10 + "px" : "-200px",
+          car4: (parseInt(this.state.car4) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car4) + 10 + "px" : "-550px",
         })
         this.carCollide();
         this.spawnCar();
       }
     }
 
-
     //moving player
     turn = (e) => {
-
       if (this.state.game_over === false) {
         let key = e.keyCode;
         this.setState({
-
            playerOffsetLeft: document.querySelector('.car-player').offsetLeft,
            playerOffsetTop: document.querySelector('.car-player').offsetTop,
         });
@@ -275,6 +282,7 @@ document.addEventListener("DOMContentLoaded", function(){
         })
       }
     }
+
     componentDidMount(){
       //set height and width to use for collisions
       this.setState({
@@ -319,7 +327,7 @@ document.addEventListener("DOMContentLoaded", function(){
              <div className="car car-1" style={{top:this.state.car1, left:this.state.car1Left}}></div>
              <div className="car car-2" style={{top:this.state.car2, left:this.state.car2Left}}></div>
              <div className="car car-3" style={{top:this.state.car3, left:this.state.car3Left}}></div>
-
+             <div className="car car-4" style={{top:this.state.car4, left:this.state.car4Left}}></div>
          </div>
        )
      }
