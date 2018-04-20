@@ -42,17 +42,14 @@ body {
 .car-1 {
   transform: rotate(180deg);
   top: -100px;
-  left: 60%;
   background-image: url(cbbb23706ca63933d3273a83874f9f27.png); }
 
 .car-2 {
   transform: rotate(180deg);
   top: -200px;
-  left: 40%;
   background-image: url(0d13b6931c43ff2bd5285c119a38f8e8.png); }
 
 .car-3 {
   transform: rotate(180deg);
   top: -350px;
-  left: 50%;
   background-image: url(39db2b2be8bd6f6ed28d2e4eca7c2522.png); }

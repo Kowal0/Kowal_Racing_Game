@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", function(){
         clientHeight: 0,
         clientWidth: 0,
 
-        playerOffsetLeft: null,
-        playerOffsetTop: null,
+        playerOffsetLeft: 0,
+        playerOffsetTop: 0,
 
         move_right: false,
         move_left: false,
@@ -37,11 +37,13 @@ document.addEventListener("DOMContentLoaded", function(){
         stripe4: "750px",
 
         car1: "-100px",
+        car1Left: "60%",
         car1OffsetLeft: null,
-        // car1OffsetTop: 0,
         car2: "-200px",
+        car2Left: "40%",
         car2OffsetLeft: null,
         car3: "-350px",
+        car3Left: "50%",
         car3OffsetLeft: null,
       }
     }
@@ -49,14 +51,24 @@ document.addEventListener("DOMContentLoaded", function(){
     //car collisions
     carCollide = () => {
       this.playerYTop = this.state.playerOffsetTop;
-      this.playerYBottom = this.state.playerOffsetTop + 173;
+      this.playerYBottom = this.state.playerOffsetTop + 163;
       this.playerXLeft = this.state.playerOffsetLeft;
-      this.playerXRight = this.state.playerOffsetLeft + 89;
+      this.playerXRight = this.state.playerOffsetLeft + 75;
 
       this.car1YTop = parseInt(this.state.car1);
-      this.car1YBottom = parseInt(this.state.car1) + 173;
+      this.car1YBottom = parseInt(this.state.car1) + 163;
       this.car1XLeft = this.state.car1OffsetLeft;
-      this.car1XRight = this.state.car1OffsetLeft + 89;
+      this.car1XRight = this.state.car1OffsetLeft + 75;
+
+      this.car2YTop = parseInt(this.state.car2);
+      this.car2YBottom = parseInt(this.state.car2) + 163;
+      this.car2XLeft = this.state.car2OffsetLeft;
+      this.car2XRight = this.state.car2OffsetLeft + 75;
+
+      this.car3YTop = parseInt(this.state.car3);
+      this.car3YBottom = parseInt(this.state.car3) + 163;
+      this.car3XLeft = this.state.car3OffsetLeft;
+      this.car3XRight = this.state.car3OffsetLeft + 75;
 
       if (((this.playerYBottom >= this.car1YTop && this.playerYBottom <= this.car1YBottom) ||
       (this.playerYTop <= this.car1YBottom && this.playerYTop >= this.car1YTop)) &&
@@ -67,12 +79,36 @@ document.addEventListener("DOMContentLoaded", function(){
           this.setState({
             game_over: true
           })
+      } else if (((this.playerYBottom >= this.car2YTop && this.playerYBottom <= this.car2YBottom) ||
+      (this.playerYTop <= this.car2YBottom && this.playerYTop >= this.car2YTop)) &&
+      ((this.playerXLeft <= this.car2XRight && this.playerXLeft >= this.car2XLeft) ||
+      (this.playerXRight >= this.car2XLeft && this.playerXRight <= this.car2XRight))) {
+        console.log("jeb");
+        this.setState({
+          game_over: true
+        })
+      } else if (((this.playerYBottom >= this.car3YTop && this.playerYBottom <= this.car3YBottom) ||
+      (this.playerYTop <= this.car3YBottom && this.playerYTop >= this.car3YTop)) &&
+      ((this.playerXLeft <= this.car3XRight && this.playerXLeft >= this.car3XLeft) ||
+      (this.playerXRight >= this.car3XLeft && this.playerXRight <= this.car3XRight))) {
+        console.log("jeb");
+        this.setState({
+          game_over: true
+        })
       }
+    }
+    //car spawning
+    spawnCar = () => {
+      this.setState({
+        car1Left: (parseInt(this.state.car1) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (31 - 5) + 5) + "%" : this.state.car1Left,
+        car2Left: (parseInt(this.state.car2) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (57 - 31) + 26) + "%" : this.state.car2Left,
+        car3Left: (parseInt(this.state.car3) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (83 - 57) + 57) + "%" : this.state.car3Left,
+      })
     }
 
     //background
     animateBackground = () => {
-      // this.carCollide();
+      console.log();
       if (this.state.game_over === false) {
         this.setState({
           stripe_on: requestAnimationFrame(this.animateBackground),
@@ -83,31 +119,31 @@ document.addEventListener("DOMContentLoaded", function(){
           stripe4: (parseInt(this.state.stripe4) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe4) + 10 + "px" : "-150px",
 
           car1OffsetLeft: document.querySelector('.car-1').offsetLeft,
-          // car1OffsetTop: document.querySelector('.car-1').offsetTop,
           car2OffsetLeft: document.querySelector('.car-2').offsetLeft,
           car3OffsetLeft: document.querySelector('.car-3').offsetLeft,
+
 
           car1: (parseInt(this.state.car1) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car1) + 8 + "px" : "-100px",
           car2: (parseInt(this.state.car2) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car2) + 8 + "px" : "-150px",
           car3: (parseInt(this.state.car3) < parseInt(this.state.clientHeight)) ? parseInt(this.state.car3) + 8 + "px" : "-200px",
 
+
         })
         this.carCollide();
+        this.spawnCar();
       }
     }
 
 
     //moving player
     turn = (e) => {
-      // console.log(document.querySelector('.road').getBoundingClientRect(), this.state.playerOffsetLeft);
-      // console.log(this.state.clientWidth);
+
       if (this.state.game_over === false) {
         let key = e.keyCode;
         this.setState({
 
            playerOffsetLeft: document.querySelector('.car-player').offsetLeft,
            playerOffsetTop: document.querySelector('.car-player').offsetTop,
-           // carOffsetBottom: document.querySelector('.car-player').offsetLeft,
         });
         if (key === 37 && this.state.move_left === false ) {
             this.setState({
@@ -208,7 +244,9 @@ document.addEventListener("DOMContentLoaded", function(){
       //set height and width to use for collisions
       this.setState({
         clientHeight: document.querySelector('.road').clientHeight,
-        clientWidth: document.querySelector('.road').clientWidth
+        clientWidth: document.querySelector('.road').clientWidth,
+        playerOffsetTop: document.querySelector('.car-player').offsetTop,
+        playerOffsetLeft: document.querySelector('.car-player').offsetLeft,
       })
 
       const music = require('./music/Aparatus.mp3');
@@ -238,9 +276,9 @@ document.addEventListener("DOMContentLoaded", function(){
              <div className="stripe stripe-r" style={{top:this.state.stripe3}}></div>
              <div className="stripe stripe-r" style={{top:this.state.stripe4}}></div>
              <div className="car car-player" style={{left:this.state.player_left, bottom:this.state.player_bottom, transform:this.state.player_rotate}}></div>
-             <div className="car car-1" style={{top:this.state.car1}}></div>
-             <div className="car car-2" style={{top:this.state.car2}}></div>
-             <div className="car car-3" style={{top:this.state.car3}}></div>
+             <div className="car car-1" style={{top:this.state.car1, left:this.state.car1Left}}></div>
+             <div className="car car-2" style={{top:this.state.car2, left:this.state.car2Left}}></div>
+             <div className="car car-3" style={{top:this.state.car3, left:this.state.car3Left}}></div>
            </div>
          </div>
        )
