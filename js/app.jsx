@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function(){
         resultText: "",
         resultClass: "",
 
+        isMobile: window.innerWidth,
         clientHeight: 0,
         clientWidth: 0,
 
@@ -288,8 +289,21 @@ document.addEventListener("DOMContentLoaded", function(){
       }
     }
 
+    //check if window is wide enough to play the game
+    handleWindowSizeChange = () => {
+      this.setState({ isMobile: window.innerWidth });
+    };
+
+    componentWillMount(){
+      window.addEventListener('resize', this.handleWindowSizeChange);
+    }
+
+    componentWillUnmount() {
+      window.removeEventListener('resize', this.handleWindowSizeChange);
+    }
+
     componentDidMount(){
-      //set height and width to use for collisions
+      //set height, width and offset to use for collisions
       this.setState({
         clientHeight: document.querySelector('.road').clientHeight,
         clientWidth: document.querySelector('.road').clientWidth,
@@ -308,33 +322,41 @@ document.addEventListener("DOMContentLoaded", function(){
         document.addEventListener('load', this.animateBackground());
         document.addEventListener('load', this.countTime());
       }, 1000)
-
       this.backgroundMusic.play()
-
-
     }
 
      render() {
-       return (
+       const isMobile = this.state.isMobile <= 679;
+       console.log(isMobile);
+       console.log(this.state.isMobile);
+       if (isMobile) {
+         return (
+            <div className="is-mobile">This screen is to small to play the game.
+              To fully experience this amazing creation you need to run it in a browser of at least 680px width
+            </div>
+         )
+       } else {
+         return (
+           <div className="road">
+             <div className={this.state.resultClass}>{this.state.resultText}</div>
+               <div className="timer">{this.state.timer}</div>
+               <div className="stripe stripe-l" style={{top:this.state.stripe1}}></div>
+               <div className="stripe stripe-l" style={{top:this.state.stripe2}}></div>
+               <div className="stripe stripe-l" style={{top:this.state.stripe3}}></div>
+               <div className="stripe stripe-l" style={{top:this.state.stripe4}}></div>
+               <div className="stripe stripe-r" style={{top:this.state.stripe1}}></div>
+               <div className="stripe stripe-r" style={{top:this.state.stripe2}}></div>
+               <div className="stripe stripe-r" style={{top:this.state.stripe3}}></div>
+               <div className="stripe stripe-r" style={{top:this.state.stripe4}}></div>
+               <div className="car car-player" style={{left:this.state.player_left, bottom:this.state.player_bottom, transform:this.state.player_rotate}}></div>
+               <div className="car car-1" style={{top:this.state.car1, left:this.state.car1Left}}></div>
+               <div className="car car-2" style={{top:this.state.car2, left:this.state.car2Left}}></div>
+               <div className="car car-3" style={{top:this.state.car3, left:this.state.car3Left}}></div>
+               <div className="car car-4" style={{top:this.state.car4, left:this.state.car4Left}}></div>
+           </div>
+         )
+       }
 
-         <div className="road">
-           <div className={this.state.resultClass}>{this.state.resultText}</div>
-             <div className="timer">{this.state.timer}</div>
-             <div className="stripe stripe-l" style={{top:this.state.stripe1}}></div>
-             <div className="stripe stripe-l" style={{top:this.state.stripe2}}></div>
-             <div className="stripe stripe-l" style={{top:this.state.stripe3}}></div>
-             <div className="stripe stripe-l" style={{top:this.state.stripe4}}></div>
-             <div className="stripe stripe-r" style={{top:this.state.stripe1}}></div>
-             <div className="stripe stripe-r" style={{top:this.state.stripe2}}></div>
-             <div className="stripe stripe-r" style={{top:this.state.stripe3}}></div>
-             <div className="stripe stripe-r" style={{top:this.state.stripe4}}></div>
-             <div className="car car-player" style={{left:this.state.player_left, bottom:this.state.player_bottom, transform:this.state.player_rotate}}></div>
-             <div className="car car-1" style={{top:this.state.car1, left:this.state.car1Left}}></div>
-             <div className="car car-2" style={{top:this.state.car2, left:this.state.car2Left}}></div>
-             <div className="car car-3" style={{top:this.state.car3, left:this.state.car3Left}}></div>
-             <div className="car car-4" style={{top:this.state.car4, left:this.state.car4Left}}></div>
-         </div>
-       )
      }
    }
 

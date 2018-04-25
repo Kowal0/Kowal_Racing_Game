@@ -11,6 +11,15 @@ body {
   font-size: 15px;
 }
 
+.is-mobile {
+  height: 100vh;
+  font-size: 2rem;
+  color: rgb(60, 99, 72);
+  background: linear-gradient(to right, #f2994a, #f2c94c);
+  text-align: center;
+  width: 100%;
+}
+
 .result {
   position: fixed;
   z-index: 2;
@@ -18,7 +27,7 @@ body {
   color: rgb(60, 99, 72);
   text-align: center;
   height: 100vh;
-  width: 45%;
+  // width: 45%;
   margin: 0 auto;
   background: linear-gradient(to right, #f2994a, #f2c94c);
   overflow: hidden;
@@ -29,7 +38,7 @@ body {
 .road {
     position: relative;
     height: 100vh;
-    width: 45%;
+    // width: 45%;
     margin: 0 auto;
     border-left: 8px solid grey;
     border-right: 8px solid grey;
@@ -100,3 +109,16 @@ body {
 //   transform: rotate(180deg);
 //   background-image: url("../images/yellow_car.png");
 // }
+
+@media (min-width: 680px) {
+  .road {
+    min-width: 680px;
+    max-width: 864px;
+    width: 100%;
+  }
+  .result {
+    min-width: 680px;
+    max-width: 864px;
+    width: 100%;
+  }
+}

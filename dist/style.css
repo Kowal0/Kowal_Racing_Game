@@ -9,6 +9,14 @@ body {
   background-color: darkgreen;
   font-size: 15px; }
 
+.is-mobile {
+  height: 100vh;
+  font-size: 2rem;
+  color: #3c6348;
+  background: linear-gradient(to right, #f2994a, #f2c94c);
+  text-align: center;
+  width: 100%; }
+
 .result {
   position: fixed;
   z-index: 2;
@@ -16,7 +24,6 @@ body {
   color: #3c6348;
   text-align: center;
   height: 100vh;
-  width: 45%;
   margin: 0 auto;
   background: linear-gradient(to right, #f2994a, #f2c94c);
   overflow: hidden; }
@@ -24,7 +31,6 @@ body {
 .road {
   position: relative;
   height: 100vh;
-  width: 45%;
   margin: 0 auto;
   border-left: 8px solid grey;
   border-right: 8px solid grey;
@@ -77,3 +83,13 @@ body {
 .car-4 {
   transform: rotate(180deg);
   background-image: url(e78ec491ff6e531365bae95d43b8ce36.png); }
+
+@media (min-width: 680px) {
+  .road {
+    min-width: 680px;
+    max-width: 864px;
+    width: 100%; }
+  .result {
+    min-width: 680px;
+    max-width: 864px;
+    width: 100%; } }
