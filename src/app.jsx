@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function(){
     constructor(props){
       super(props);
       this.state={
-        game_over: false,
+        gameOver: false,
         timer: 30,
         resultText: "",
         resultClass: "",
@@ -26,16 +26,16 @@ document.addEventListener("DOMContentLoaded", function(){
         playerOffsetLeft: 0,
         playerOffsetTop: 0,
 
-        move_right: false,
-        move_left: false,
-        move_up: false,
-        move_down: false,
+        moveRight: false,
+        moveLeft: false,
+        moveUp: false,
+        moveDown: false,
 
-        player_left: "44%",
-        player_bottom: "2%",
-        player_rotate: "rotate(180deg)",
+        playerLeft: "44%",
+        playerBottom: "2%",
+        playerRotate: "rotate(180deg)",
 
-        animate_on: true,
+        animateOn: true,
 
         stripe1: "-150px",
         stripe2: "150px",
@@ -61,13 +61,13 @@ document.addEventListener("DOMContentLoaded", function(){
         this.timer = setInterval(() => {
           if (this.state.timer === 0) {
             this.setState({
-              game_over: true,
+              gameOver: true,
               resultText: "Git!",
               resultClass: "result"
             })
             this.backgroundMusic.pause();
             clearInterval(this.timer);
-          } else if (this.state.game_over === true) {
+          } else if (this.state.gameOver === true) {
             this.setState({
               resultText: "Lol!",
               resultClass: "result"
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function(){
       (this.playerRight >= this.car1Left && this.playerRight <= this.car1Right))) {
           this.crash.play();
           this.setState({
-            game_over: true
+            gameOver: true
           })
       } else if (((this.playerBottom >= this.car2Top && this.playerBottom <= this.car2Bottom) ||
       (this.playerTop <= this.car2Bottom && this.playerTop >= this.car2Top)) &&
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function(){
       (this.playerRight >= this.car2Left && this.playerRight <= this.car2Right))) {
         this.crash.play();
         this.setState({
-          game_over: true
+          gameOver: true
         })
       } else if (((this.playerBottom >= this.car3Top && this.playerBottom <= this.car3Bottom) ||
       (this.playerTop <= this.car3Bottom && this.playerTop >= this.car3Top)) &&
@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function(){
       (this.playerRight >= this.car3Left && this.playerRight <= this.car3Right))) {
         this.crash.play();
         this.setState({
-          game_over: true
+          gameOver: true
         })
       } else if (((this.playerBottom >= this.car4Top && this.playerBottom <= this.car4Bottom) ||
       (this.playerTop <= this.car4Bottom && this.playerTop >= this.car4Top)) &&
@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function(){
       (this.playerRight >= this.car4Left && this.playerRight <= this.car4Right))) {
         this.crash.play();
         this.setState({
-          game_over: true
+          gameOver: true
         })
       }
     }
@@ -149,16 +149,16 @@ document.addEventListener("DOMContentLoaded", function(){
         car1Left: (parseInt(this.state.car1) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (27 - 5) + 5) + "%" : this.state.car1Left,
         car2Left: (parseInt(this.state.car2) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (49 - 27) + 27) + "%" : this.state.car2Left,
         car3Left: (parseInt(this.state.car3) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (71 - 49) + 49) + "%" : this.state.car3Left,
-        car4Left: (parseInt(this.state.car4) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (93 - 71) + 71) + "%" : this.state.car4Left,
+        car4Left: (parseInt(this.state.car4) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (92 - 71) + 71) + "%" : this.state.car4Left,
       })
     }
 
     //background
     animateBackground = () => {
       console.log();
-      if (this.state.game_over === false) {
+      if (this.state.gameOver === false) {
         this.setState({
-          animate_on: requestAnimationFrame(this.animateBackground),
+          animateOn: requestAnimationFrame(this.animateBackground),
 
           stripe1: (parseInt(this.state.stripe1) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe1) + 14 + "px" : "-150px",
           stripe2: (parseInt(this.state.stripe2) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe2) + 14 + "px" : "-150px",
@@ -183,104 +183,104 @@ document.addEventListener("DOMContentLoaded", function(){
 
     //moving player
     turn = (e) => {
-      if (this.state.game_over === false) {
+      if (this.state.gameOver === false) {
         let key = e.keyCode;
         this.setState({
            playerOffsetLeft: document.querySelector('.car-player').offsetLeft,
            playerOffsetTop: document.querySelector('.car-player').offsetTop,
         });
-        if (key === 37 && this.state.move_left === false ) {
+        if (key === 37 && this.state.moveLeft === false ) {
             this.setState({
-              move_left: this.state.playerOffsetLeft > 10 ? requestAnimationFrame(this.left) : cancelAnimationFrame(this.state.move_left)
+              moveLeft: this.state.playerOffsetLeft > 10 ? requestAnimationFrame(this.left) : cancelAnimationFrame(this.state.moveLeft)
             })
-        } else if (key === 38 && this.state.move_up === false) {
+        } else if (key === 38 && this.state.moveUp === false) {
             this.setState({
-              move_up: this.state.playerOffsetTop > 10 ? requestAnimationFrame(this.up) : cancelAnimationFrame(this.state.move_up)
+              moveUp: this.state.playerOffsetTop > 10 ? requestAnimationFrame(this.up) : cancelAnimationFrame(this.state.moveUp)
             })
-        } else if (key === 39 && this.state.move_right === false) {
+        } else if (key === 39 && this.state.moveRight === false) {
             this.setState({
-              move_right: this.state.playerOffsetLeft  <  parseInt(this.state.clientWidth) - 99 ? requestAnimationFrame(this.right) : cancelAnimationFrame(this.state.move_right)
+              moveRight: this.state.playerOffsetLeft  <  parseInt(this.state.clientWidth) - 99 ? requestAnimationFrame(this.right) : cancelAnimationFrame(this.state.moveRight)
             })
-        } else if (key === 40 && this.state.move_down === false) {
+        } else if (key === 40 && this.state.moveDown === false) {
             this.setState({
-              move_down: requestAnimationFrame(this.down)
+              moveDown: requestAnimationFrame(this.down)
             })
           }
         }
       }
       turnStop = (e) => {
-        if (this.state.game_over === false) {
+        if (this.state.gameOver === false) {
         let key = e.keyCode;
         if (key === 37) {
           this.setState({
-            player_rotate: "rotate(180deg)",
+            playerRotate: "rotate(180deg)",
             playerOffsetLeft: document.querySelector('.car-player').offsetLeft,
-            move_left: cancelAnimationFrame(this.state.move_left),
-            move_left: false
+            moveLeft: cancelAnimationFrame(this.state.moveLeft),
+            moveLeft: false
           })
         } else if (key === 38  ) {
           this.setState({
             playerOffsetTop: document.querySelector('.car-player').offsetTop,
-            move_up: cancelAnimationFrame(this.state.move_up),
-            move_up: false
+            moveUp: cancelAnimationFrame(this.state.moveUp),
+            moveUp: false
           })
         } else if (key === 39) {
           this.setState({
-            player_rotate: "rotate(180deg)",
+            playerRotate: "rotate(180deg)",
             playerOffsetLeft: document.querySelector('.car-player').offsetLeft,
-            move_right: cancelAnimationFrame(this.state.move_right),
-            move_right: false
+            moveRight: cancelAnimationFrame(this.state.moveRight),
+            moveRight: false
           })
         } else if (key === 40) {
           this.setState({
             playerOffsetTop: document.querySelector('.car-player').offsetTop,
-            move_down: cancelAnimationFrame(this.state.move_down),
-            move_down: false
+            moveDown: cancelAnimationFrame(this.state.moveDown),
+            moveDown: false
           })
       }
     }
   }
 
     left = (e) => {
-      if (this.state.game_over === false) {
+      if (this.state.gameOver === false) {
         this.carCollide();
         this.setState({
-          player_rotate: "rotate(173deg)",
-          player_left: parseInt(this.state.player_left) - 1 + "%",
+          playerRotate: "rotate(173deg)",
+          playerLeft: parseInt(this.state.playerLeft) - 1 + "%",
           playerOffsetLeft: document.querySelector('.car-player').offsetLeft,
-          move_left: this.state.playerOffsetLeft > 10 ? requestAnimationFrame(this.left) : cancelAnimationFrame(this.state.move_left)
+          moveLeft: this.state.playerOffsetLeft > 10 ? requestAnimationFrame(this.left) : cancelAnimationFrame(this.state.moveLeft)
         })
       }
     }
     right = (e) => {
-      if (this.state.game_over === false) {
+      if (this.state.gameOver === false) {
         this.carCollide();
         this.setState({
-          player_rotate: "rotate(187deg)",
-          player_left: parseInt(this.state.player_left) + 1 + "%",
+          playerRotate: "rotate(187deg)",
+          playerLeft: parseInt(this.state.playerLeft) + 1 + "%",
           playerOffsetLeft: document.querySelector('.car-player').offsetLeft,
-          move_right: this.state.playerOffsetLeft  <  parseInt(this.state.clientWidth) - 99 ? requestAnimationFrame(this.right) : cancelAnimationFrame(this.state.move_right)
+          moveRight: this.state.playerOffsetLeft  <  parseInt(this.state.clientWidth) - 99 ? requestAnimationFrame(this.right) : cancelAnimationFrame(this.state.moveRight)
         })
       }
     }
     up = (e) => {
       this.carCollide();
-      if (this.state.game_over === false) {
+      if (this.state.gameOver === false) {
         this.carCollide();
         this.setState({
-          player_bottom: parseInt(this.state.player_bottom) + 1 + "%",
+          playerBottom: parseInt(this.state.playerBottom) + 1 + "%",
           playerOffsetTop: document.querySelector('.car-player').offsetTop,
-          move_up: this.state.playerOffsetTop > 10 ? requestAnimationFrame(this.up) : cancelAnimationFrame(this.state.move_up)
+          moveUp: this.state.playerOffsetTop > 10 ? requestAnimationFrame(this.up) : cancelAnimationFrame(this.state.moveUp)
         })
       }
     }
     down = (e) => {
       this.carCollide();
-      if (this.state.game_over === false) {
+      if (this.state.gameOver === false) {
         this.setState({
-          player_bottom: parseInt(this.state.player_bottom) - 1 + "%",
+          playerBottom: parseInt(this.state.playerBottom) - 1 + "%",
           playerOffsetTop: document.querySelector('.car-player').offsetTop,
-          move_down: this.state.playerOffsetTop < parseInt(this.state.clientHeight) - 183 ? requestAnimationFrame(this.down) : cancelAnimationFrame(this.state.move_down)
+          moveDown: this.state.playerOffsetTop < parseInt(this.state.clientHeight) - 183 ? requestAnimationFrame(this.down) : cancelAnimationFrame(this.state.moveDown)
         })
       }
     }
@@ -342,7 +342,7 @@ document.addEventListener("DOMContentLoaded", function(){
                <div className="stripe stripe-r" style={{top:this.state.stripe2}}></div>
                <div className="stripe stripe-r" style={{top:this.state.stripe3}}></div>
                <div className="stripe stripe-r" style={{top:this.state.stripe4}}></div>
-               <div className="car car-player" style={{left:this.state.player_left, bottom:this.state.player_bottom, transform:this.state.player_rotate}}></div>
+               <div className="car car-player" style={{left:this.state.playerLeft, bottom:this.state.playerBottom, transform:this.state.playerRotate}}></div>
                <div className="car car-1" style={{top:this.state.car1, left:this.state.car1Left}}></div>
                <div className="car car-2" style={{top:this.state.car2, left:this.state.car2Left}}></div>
                <div className="car car-3" style={{top:this.state.car3, left:this.state.car3Left}}></div>
