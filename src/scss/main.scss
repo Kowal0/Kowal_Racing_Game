@@ -32,6 +32,30 @@ body {
   overflow: hidden;
 }
 
+.score {
+  position: absolute;
+  text-align: left;
+  z-index: 1;
+  border: 1px solid white;
+  border-top: none;
+  padding: 0 1.5rem;
+  color:white;
+  font-size: 3rem;
+  left: 5%;
+}
+
+.timer {
+  position: absolute;
+  text-align: center;
+  z-index: 1;
+  border: 1px solid white;
+  border-top: none;
+  padding: 0 1.5rem;
+  color:white;
+  font-size: 3rem;
+  left: 50%;
+}
+
 
 // road
 .road {
@@ -57,18 +81,6 @@ body {
 
 .stripe-r {
   margin-left: 64%;
-}
-
-.timer {
-  position: fixed;
-  text-align: center;
-  z-index: 1;
-  border: 1px solid white;
-  border-top: none;
-  padding: 0 1.5rem;
-  color:white;
-  font-size: 3rem;
-  left: 50%;
 }
 
 // cars
