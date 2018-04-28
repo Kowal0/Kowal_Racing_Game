@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function(){
         player_bottom: "2%",
         player_rotate: "rotate(180deg)",
 
-        stripe_on: true,
+        animate_on: true,
 
         stripe1: "-150px",
         stripe2: "150px",
@@ -84,59 +84,59 @@ document.addEventListener("DOMContentLoaded", function(){
 
     //car collisions
     carCollide = () => {
-      this.playerYTop = this.state.playerOffsetTop;
-      this.playerYBottom = this.state.playerOffsetTop + 163;
-      this.playerXLeft = this.state.playerOffsetLeft;
-      this.playerXRight = this.state.playerOffsetLeft + 75;
+      this.playerTop = this.state.playerOffsetTop;
+      this.playerBottom = this.state.playerOffsetTop + 163;
+      this.playerLeft = this.state.playerOffsetLeft;
+      this.playerRight = this.state.playerOffsetLeft + 75;
 
-      this.car1YTop = parseInt(this.state.car1);
-      this.car1YBottom = parseInt(this.state.car1) + 163;
-      this.car1XLeft = this.state.car1OffsetLeft;
-      this.car1XRight = this.state.car1OffsetLeft + 75;
+      this.car1Top = parseInt(this.state.car1);
+      this.car1Bottom = parseInt(this.state.car1) + 163;
+      this.car1Left = this.state.car1OffsetLeft;
+      this.car1Right = this.state.car1OffsetLeft + 75;
 
-      this.car2YTop = parseInt(this.state.car2);
-      this.car2YBottom = parseInt(this.state.car2) + 163;
-      this.car2XLeft = this.state.car2OffsetLeft;
-      this.car2XRight = this.state.car2OffsetLeft + 75;
+      this.car2Top = parseInt(this.state.car2);
+      this.car2Bottom = parseInt(this.state.car2) + 163;
+      this.car2Left = this.state.car2OffsetLeft;
+      this.car2Right = this.state.car2OffsetLeft + 75;
 
-      this.car3YTop = parseInt(this.state.car3);
-      this.car3YBottom = parseInt(this.state.car3) + 163;
-      this.car3XLeft = this.state.car3OffsetLeft;
-      this.car3XRight = this.state.car3OffsetLeft + 75;
+      this.car3Top = parseInt(this.state.car3);
+      this.car3Bottom = parseInt(this.state.car3) + 163;
+      this.car3Left = this.state.car3OffsetLeft;
+      this.car3Right = this.state.car3OffsetLeft + 75;
 
-      this.car4YTop = parseInt(this.state.car4);
-      this.car4YBottom = parseInt(this.state.car4) + 163;
-      this.car4XLeft = this.state.car4OffsetLeft;
-      this.car4XRight = this.state.car4OffsetLeft + 75;
+      this.car4Top = parseInt(this.state.car4);
+      this.car4Bottom = parseInt(this.state.car4) + 163;
+      this.car4Left = this.state.car4OffsetLeft;
+      this.car4Right = this.state.car4OffsetLeft + 75;
 
-      if (((this.playerYBottom >= this.car1YTop && this.playerYBottom <= this.car1YBottom) ||
-      (this.playerYTop <= this.car1YBottom && this.playerYTop >= this.car1YTop)) &&
-      ((this.playerXLeft <= this.car1XRight && this.playerXLeft >= this.car1XLeft) ||
-      (this.playerXRight >= this.car1XLeft && this.playerXRight <= this.car1XRight))) {
+      if (((this.playerBottom >= this.car1Top && this.playerBottom <= this.car1Bottom) ||
+      (this.playerTop <= this.car1Bottom && this.playerTop >= this.car1Top)) &&
+      ((this.playerLeft <= this.car1Right && this.playerLeft >= this.car1Left) ||
+      (this.playerRight >= this.car1Left && this.playerRight <= this.car1Right))) {
           this.crash.play();
           this.setState({
             game_over: true
           })
-      } else if (((this.playerYBottom >= this.car2YTop && this.playerYBottom <= this.car2YBottom) ||
-      (this.playerYTop <= this.car2YBottom && this.playerYTop >= this.car2YTop)) &&
-      ((this.playerXLeft <= this.car2XRight && this.playerXLeft >= this.car2XLeft) ||
-      (this.playerXRight >= this.car2XLeft && this.playerXRight <= this.car2XRight))) {
+      } else if (((this.playerBottom >= this.car2Top && this.playerBottom <= this.car2Bottom) ||
+      (this.playerTop <= this.car2Bottom && this.playerTop >= this.car2Top)) &&
+      ((this.playerLeft <= this.car2Right && this.playerLeft >= this.car2Left) ||
+      (this.playerRight >= this.car2Left && this.playerRight <= this.car2Right))) {
         this.crash.play();
         this.setState({
           game_over: true
         })
-      } else if (((this.playerYBottom >= this.car3YTop && this.playerYBottom <= this.car3YBottom) ||
-      (this.playerYTop <= this.car3YBottom && this.playerYTop >= this.car3YTop)) &&
-      ((this.playerXLeft <= this.car3XRight && this.playerXLeft >= this.car3XLeft) ||
-      (this.playerXRight >= this.car3XLeft && this.playerXRight <= this.car3XRight))) {
+      } else if (((this.playerBottom >= this.car3Top && this.playerBottom <= this.car3Bottom) ||
+      (this.playerTop <= this.car3Bottom && this.playerTop >= this.car3Top)) &&
+      ((this.playerLeft <= this.car3Right && this.playerLeft >= this.car3Left) ||
+      (this.playerRight >= this.car3Left && this.playerRight <= this.car3Right))) {
         this.crash.play();
         this.setState({
           game_over: true
         })
-      } else if (((this.playerYBottom >= this.car4YTop && this.playerYBottom <= this.car4YBottom) ||
-      (this.playerYTop <= this.car4YBottom && this.playerYTop >= this.car4YTop)) &&
-      ((this.playerXLeft <= this.car4XRight && this.playerXLeft >= this.car4XLeft) ||
-      (this.playerXRight >= this.car4XLeft && this.playerXRight <= this.car4XRight))) {
+      } else if (((this.playerBottom >= this.car4Top && this.playerBottom <= this.car4Bottom) ||
+      (this.playerTop <= this.car4Bottom && this.playerTop >= this.car4Top)) &&
+      ((this.playerLeft <= this.car4Right && this.playerLeft >= this.car4Left) ||
+      (this.playerRight >= this.car4Left && this.playerRight <= this.car4Right))) {
         this.crash.play();
         this.setState({
           game_over: true
@@ -146,10 +146,10 @@ document.addEventListener("DOMContentLoaded", function(){
     //car spawning
     spawnCar = () => {
       this.setState({
-        car1Left: (parseInt(this.state.car1) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (31 - 5) + 5) + "%" : this.state.car1Left,
-        car2Left: (parseInt(this.state.car2) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (57 - 31) + 26) + "%" : this.state.car2Left,
-        car3Left: (parseInt(this.state.car3) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (85 - 57) + 57) + "%" : this.state.car3Left,
-        car4Left: (parseInt(this.state.car4) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (85 - 30) + 30) + "%" : this.state.car4Left,
+        car1Left: (parseInt(this.state.car1) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (27 - 5) + 5) + "%" : this.state.car1Left,
+        car2Left: (parseInt(this.state.car2) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (49 - 27) + 27) + "%" : this.state.car2Left,
+        car3Left: (parseInt(this.state.car3) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (71 - 49) + 49) + "%" : this.state.car3Left,
+        car4Left: (parseInt(this.state.car4) > parseInt(this.state.clientHeight)) ? Math.floor(Math.random() * (93 - 71) + 71) + "%" : this.state.car4Left,
       })
     }
 
@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function(){
       console.log();
       if (this.state.game_over === false) {
         this.setState({
-          stripe_on: requestAnimationFrame(this.animateBackground),
+          animate_on: requestAnimationFrame(this.animateBackground),
 
           stripe1: (parseInt(this.state.stripe1) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe1) + 14 + "px" : "-150px",
           stripe2: (parseInt(this.state.stripe2) < parseInt(this.state.clientHeight) + 75) ? parseInt(this.state.stripe2) + 14 + "px" : "-150px",
