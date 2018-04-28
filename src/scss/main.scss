@@ -27,7 +27,6 @@ body {
   color: rgb(60, 99, 72);
   text-align: center;
   height: 100vh;
-  // width: 45%;
   margin: 0 auto;
   background: linear-gradient(to right, #f2994a, #f2c94c);
   overflow: hidden;
@@ -38,7 +37,6 @@ body {
 .road {
     position: relative;
     height: 100vh;
-    // width: 45%;
     margin: 0 auto;
     border-left: 8px solid grey;
     border-right: 8px solid grey;
@@ -67,7 +65,6 @@ body {
   z-index: 1;
   border: 1px solid white;
   border-top: none;
-  // border-radius: 50%;
   padding: 0 1.5rem;
   color:white;
   font-size: 3rem;

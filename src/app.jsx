@@ -113,7 +113,6 @@ document.addEventListener("DOMContentLoaded", function(){
       (this.playerYTop <= this.car1YBottom && this.playerYTop >= this.car1YTop)) &&
       ((this.playerXLeft <= this.car1XRight && this.playerXLeft >= this.car1XLeft) ||
       (this.playerXRight >= this.car1XLeft && this.playerXRight <= this.car1XRight))) {
-          console.log("jeb");
           this.crash.play();
           this.setState({
             game_over: true
@@ -122,7 +121,6 @@ document.addEventListener("DOMContentLoaded", function(){
       (this.playerYTop <= this.car2YBottom && this.playerYTop >= this.car2YTop)) &&
       ((this.playerXLeft <= this.car2XRight && this.playerXLeft >= this.car2XLeft) ||
       (this.playerXRight >= this.car2XLeft && this.playerXRight <= this.car2XRight))) {
-        console.log("jeb");
         this.crash.play();
         this.setState({
           game_over: true
@@ -131,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function(){
       (this.playerYTop <= this.car3YBottom && this.playerYTop >= this.car3YTop)) &&
       ((this.playerXLeft <= this.car3XRight && this.playerXLeft >= this.car3XLeft) ||
       (this.playerXRight >= this.car3XLeft && this.playerXRight <= this.car3XRight))) {
-        console.log("jeb");
         this.crash.play();
         this.setState({
           game_over: true
@@ -140,7 +137,6 @@ document.addEventListener("DOMContentLoaded", function(){
       (this.playerYTop <= this.car4YBottom && this.playerYTop >= this.car4YTop)) &&
       ((this.playerXLeft <= this.car4XRight && this.playerXLeft >= this.car4XLeft) ||
       (this.playerXRight >= this.car4XLeft && this.playerXRight <= this.car4XRight))) {
-        console.log("jeb4");
         this.crash.play();
         this.setState({
           game_over: true
@@ -294,13 +290,6 @@ document.addEventListener("DOMContentLoaded", function(){
       this.setState({ isMobile: window.innerWidth });
     };
 
-    componentWillMount(){
-      window.addEventListener('resize', this.handleWindowSizeChange);
-    }
-
-    componentWillUnmount() {
-      window.removeEventListener('resize', this.handleWindowSizeChange);
-    }
 
     componentDidMount(){
       //set height, width and offset to use for collisions
@@ -316,6 +305,7 @@ document.addEventListener("DOMContentLoaded", function(){
       this.carCrash = require('./music/Car-crash.mp3');
       this.crash = new Audio(this.carCrash);
 
+      window.addEventListener('resize', this.handleWindowSizeChange);
       document.addEventListener('keydown', e => this.turn(e))
       document.addEventListener('keyup', e => this.turnStop(e))
       setTimeout(() => {
@@ -324,6 +314,10 @@ document.addEventListener("DOMContentLoaded", function(){
       }, 1000)
       this.backgroundMusic.play()
     }
+
+    // componentWillUnmount() {
+    //   window.removeEventListener('resize', this.handleWindowSizeChange);
+    // }
 
      render() {
        const isMobile = this.state.isMobile <= 679;
